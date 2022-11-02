@@ -1,1 +1,22 @@
-asdasd
+/// <summary>
+/// 闹钟振动效果(对称)
+/// </summary>
+/// <param name="rotate">单方向抖动角度</param>
+/// <param name="lastTimes">一个周期剩余抖动次数</param>
+/// <param name="maxTimes">一个周期抖动次数</param>
+/* 
+ * 使用示例:
+ * Shake(15, 15, 15);
+ */
+private void Shake(float rotate, int lastTimes, int maxTimes)
+{
+  float duration = Mathf.Abs(rotate) / 500;
+  Tweener shakeTw = m_ClockRoot.DOLocalRotate(new Vector3(0, 0, rotate), duration);
+  if (lastTimes <= 0)
+  {
+      lastTimes = maxTimes;
+      shakeTw.SetDelay(0.5f);
+  }
+  shakeTw.SetLoops(2, LoopType.Yoyo);
+  shakeTw.OnComplete(() => Shake(-rotate, --lastTimes, maxTimes));
+}
