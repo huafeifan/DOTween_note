@@ -1,0 +1,7 @@
+/// <summary>
+/// 一种低弹性的 往下坠的 入场效果 （结算界面使用）
+/// </summary>
+private void Punch()
+{
+  m_MoveRoot.DOPunchPosition(Vector3.up * 30, 0.6f, 5, 0.6f);
+}
